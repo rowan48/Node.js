@@ -3,7 +3,9 @@ function getAge(dateString)
     var today = new Date();
     var birthDate = new Date(dateString);
     if(birthDate.getFullYear() === 2021){
-    age="please enter a valid year";
+        throw new Error("Invalid date");
+
+        // age="please enter a valid year";
 }else
     {
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -18,7 +20,7 @@ function getAge(dateString)
 }
 function main (name,birthdate){
     var age=getAge(birthdate);
-    console.log("hello"+" "+name+" "+age);
+    return `"Hello" ${name} ${age}`;
 }
 
 module.exports = {
