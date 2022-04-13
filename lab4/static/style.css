@@ -1,0 +1,8 @@
+#welcome{
+    text-align: center;
+    background-color: beige;
+    color: cadetblue;
+    width: 50%;
+    position: absolute;
+    left: 20%;
+}
