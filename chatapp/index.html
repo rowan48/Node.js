@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatApp</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="menu">
+  <div class="back"><i class="fa fa-chevron-left"></i> <img src="img.png" draggable="false"/></div>
+  <div id="name" class="name">Rowan</div>
+  <div class="last">18:09</div>
+</div>
+<ol class="chat">
+  <li class="other">
+    <div class="avatar"><img src="img.png" draggable="false"/></div>
+    <div class="msg">
+      <p>Hello</p>
+      <p>what about pizza? <emoji class="pizza"/></p>
+      <time>20:17</time>
+    </div>
+    <div class="msg">
+      <p></p>
+      <p> <emoji class="pizza"/></p>
+      <time></time>
+    </div>
+  </li>
+  <li class="self">
+    <div class="avatar"><img src="img2.jpg" draggable="false"/></div>
+    <div class="msg">
+      <p>mmmm...</p>
+      <p>why not what about after studying ... <emoji class="books"/></p>
+      <p>let's see</p>
+      <time>20:18</time>
+    </div>
+  </li>
+</ol>
+
+  <input id="chat" class="textarea " type="text" placeholder="Type here!"/>
+<button type="submit" onclick="sendMessage();" >send message</button>
+  <script>
+    var socket = io.connect('localhost:3000')
+    socket.on('connected', function(data){
+      console.log('successed joined')
+      nickname = prompt('what is your nick name')
+      document.getElementById("name").innerText=nickname;
+      socket.emit('join', nickname)
+      socket.on('msg', function(data){
+        // document.getElementById('client').innerHTML = "welcome to client"
+        // document.getElementById('msg').innerHTML += "<br>"+ data
+        document.getElementsByClassName('msg')[0].innerHTML+="<br>"+data;
+
+        console.log(data)
+
+      })
+
+    //
+    // });
+    //
+    })
+    //
+    // socekt.on('notificatrion', fucntion(){
+    //
+    // })
+    //
+    function sendMessage(){
+      console.log("fun")
+    var chat = document.getElementById('chat').value
+    socket.emit('message', chat)
+  }
+</script>
+</script>
+</body>
+</html>
